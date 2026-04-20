@@ -1,21 +1,33 @@
 #include<iostream>
 using namespace std;
 
-void sort(int arr[], int size)
+void sort(int arr[], int i,int j)
 {
-	int tmp=0;
-	for(int i=0;i<size-1;++i)
+	int val = arr[i];
+	int l = i;
+	int r = j;
+	while (l < r)
 	{
-		for(int j=0;j<size-i;++j)
+		while (l<r && arr[r]>val)
 		{
-			if(arr[j]>arr[j+1])
-			{
-				tmp=arr[j];
-				arr[j]=arr[j+1];
-				arr[j+1]=tmp;
-			}
+			r--;		
+		}
+		if (l < r)
+		{
+			arr[l++] = arr[r];
+		}
+		while (l < r && arr[l] < val)
+		{
+			l++;
+		}
+		if (l < r)
+		{
+			arr[r--] = arr[l];
 		}
 	}
+	arr[l] = val;
+	sort(arr, i, l - 1);
+	sort(arr, l + 1; j);
 }
 int main()
 
@@ -23,5 +35,10 @@ int main()
 	int arr[] = { 12,2,454,66,78,45,2, 7};
 	int size = sizeof(arr) / sizeof(arr[0]);
 	sort(arr, size);
+	for (int i = 0; i < size; ++i)
+	{
+		cout << arr[i] << " ";
+	}
+	cout << endl;
 	return 0;
 }
